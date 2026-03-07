@@ -19,7 +19,7 @@
             <p class="text-gray-600 my-2"> {{ $fleur->description }} </p>
             <span class="text-pink-500 font-bold text-xl"> {{ $fleur->prix }} DH</span>
             <p class="text-sm text-gray-400 mt-2"> Stock disponible: {{ $fleur->stock }} </p>
-        
+            <img src="/storage/products/{$fleur->image}">
         </div>
         @endforeach
 
