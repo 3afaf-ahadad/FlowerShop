@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product; // T-akdi smiyt l-Model dyalk Product awla Fleur
+use App\Models\Product; 
 
 class CartController extends Controller
 {
@@ -21,17 +21,26 @@ class CartController extends Controller
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
-            // Hna l-fix: kan-siftu 'name' o 'price' bla ktaba zayda
             $cart[$id] = [
                 "name" => $product->nom,
                 "quantity" => 1,
-                "price" => (float) $product->prix, 
+                "price" => (float) $product->prix,
                 "image" => $product->image
             ];
         }
 
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Fleur ajoutée avec succès! 🌸');
+        return redirect()->back()->with('success', '🌸 Fleur ajoutée!');
+    }
+
+    public function update(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', '✨ Panier mis à jour!');
+        }
     }
 
     public function remove(Request $request)
@@ -42,7 +51,7 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            return redirect()->back()->with('success', 'Produit supprimé!');
+            return redirect()->back()->with('success', '🗑️ Fleur supprimée!');
         }
     }
 }
