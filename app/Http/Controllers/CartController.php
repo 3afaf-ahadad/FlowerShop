@@ -3,41 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Product; // T-akdi smiyt l-Model dyalk Product awla Fleur
 
 class CartController extends Controller
 {
-    // Afficher la page du panier
     public function index()
     {
         $cart = session()->get('cart', []);
         return view('cart.index', compact('cart'));
     }
 
-    // Ajouter une fleur au panier
     public function add(Request $request, $id)
     {
         $product = Product::findOrFail($id);
         $cart = session()->get('cart', []);
 
-        // Si la fleur existe déjà, on augmente la quantité
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
-            // Sinon, on l'ajoute avec ses détails
+            // Hna l-fix: kan-siftu 'name' o 'price' bla ktaba zayda
             $cart[$id] = [
-                "name" => $product->name,
+                "name" => $product->nom,
                 "quantity" => 1,
-                "price" => $product->price,
+                "price" => (float) $product->prix, 
                 "image" => $product->image
             ];
         }
 
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Fleur ajoutée avec succès ! 🌸');
+        return redirect()->back()->with('success', 'Fleur ajoutée avec succès! 🌸');
     }
 
-    // Supprimer une fleur du panier
     public function remove(Request $request)
     {
         if($request->id) {
@@ -46,7 +42,7 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            return redirect()->back()->with('success', 'Fleur retirée du panier.');
+            return redirect()->back()->with('success', 'Produit supprimé!');
         }
     }
 }
