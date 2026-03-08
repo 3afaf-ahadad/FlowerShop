@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product; 
+use App\Models\Product;
 
 class CartController extends Controller
 {
+
+    // Displaying the cart page
     public function index()
     {
         $cart = session()->get('cart', []);
         return view('cart.index', compact('cart'));
     }
 
+    // Adding a flower to the session
     public function add(Request $request, $id)
     {
         $product = Product::findOrFail($id);
@@ -25,7 +28,7 @@ class CartController extends Controller
                 "name" => $product->nom,
                 "quantity" => 1,
                 "price" => (float) $product->prix,
-                "image" => $product->image
+                "image" => "products/" . $product->image
             ];
         }
 
@@ -33,6 +36,7 @@ class CartController extends Controller
         return redirect()->back()->with('success', '🌸 Fleur ajoutée!');
     }
 
+    // Updating quantity (Nouhaiila)
     public function update(Request $request)
     {
         if($request->id && $request->quantity){
@@ -43,6 +47,7 @@ class CartController extends Controller
         }
     }
 
+    // Removing an item from the cart
     public function remove(Request $request)
     {
         if($request->id) {
