@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowerAtelier 🌸</title>
+    {{-- Darouri ykoun had l-vite hna --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-[#fdfbfb] antialiased">
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="{{ url('/') }}" class="text-2xl font-serif font-bold text-gray-800 tracking-tighter">
+                Flower<span class="text-pink-400 italic">Atelier</span>
+            </a>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <div class="flex items-center gap-6">
+                <a href="{{ url('/') }}" class="hidden md:block text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 hover:text-pink-500 transition">Boutique</a>
+                
+                {{-- Bouton Panier --}}
+                <a href="{{ route('cart.index') }}" class="relative p-2 bg-pink-50 rounded-full text-pink-500 hover:bg-pink-500 hover:text-white transition-all">
+                    <span class="text-xl">🛒</span>
+                    @if(session('cart') && count(session('cart')) > 0)
+                        <span class="absolute -top-1 -right-1 bg-gray-900 text-white text-[8px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">
+                            {{ count(session('cart')) }}
+                        </span>
+                    @endif
+                </a>
+            </div>
         </div>
-    </body>
+    </nav>
+
+    <main>
+        @yield('content')
+    </main>
+</body>
 </html>

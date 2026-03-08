@@ -1,22 +1,18 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 
-// Page d'accueil (Boutique)
-Route::get('/', [ProductController::class, 'index'])->name('products.index');
+Route::get('/', [ProductController::class, 'index']);
 
-// Routes dyal l-Panier (Cart)
-Route::prefix('cart')->group(function () {
-    Route::get('/', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/add/{id}', [CartController::class, 'add'])->name('cart.add');
-    Route::patch('/update', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/remove', [CartController::class, 'remove'])->name('cart.remove');
-    Route::get('/clear', [CartController::class, 'clear'])->name('cart.clear');
-});
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
-// Route Checkout (bach ma-ibqash error)
-Route::get('/checkout', function () {
-    return view('checkout');
-})->name('checkout');
+// Route bach t-zidi produit (khass tkoun POST)
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+// Route bach t-7iyedi produit (khass tkoun DELETE)
+Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::patch('/cart/update', [CartController::class, 'update'])->name('cart.update');
+
+// Route bach mat-tla3ch error d checkout
+Route::get('/checkout', function() { return "Page de paiement"; })->name('checkout');
