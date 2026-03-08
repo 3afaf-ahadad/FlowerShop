@@ -29,9 +29,14 @@
                         @endphp
                         <tr class="item-row hover:bg-pink-50/30 transition-colors" data-price="{{ $price }}">
                             <td class="p-6 flex items-center gap-4">
+<<<<<<< HEAD
                                 <img src="{{ asset('products/' . ($details['image'] ?? 'default.jpg')) }}" 
                                      class="w-20 h-20 object-cover rounded-2xl shadow-md border-2 border-white">
                                 <span class="font-bold text-gray-800 text-lg">{{ $details['name'] }}</span>
+=======
+                                <img src="{{ asset('storage/' . $details['image']) }}" class="w-16 h-16 object-cover rounded-2xl shadow-sm">
+                                <span class="font-semibold text-gray-800">{{ $details['name'] }}</span>
+>>>>>>> 4ab00ba273844ae445eceeb70a1b0506383557b2
                             </td>
                             <td class="p-6 text-center text-gray-600 font-medium">
                                 <span class="unit-price">{{ number_format($price, 2) }}</span> DH
