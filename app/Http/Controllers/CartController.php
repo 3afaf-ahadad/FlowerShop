@@ -7,17 +7,12 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-
-    // Displaying the cart page
-    public function index()
-    {
+    public function index() {
         $cart = session()->get('cart', []);
         return view('cart.index', compact('cart'));
     }
 
-    // Adding a flower to the session
-    public function add(Request $request, $id)
-    {
+    public function add($id) {
         $product = Product::findOrFail($id);
         $cart = session()->get('cart', []);
 
@@ -27,36 +22,32 @@ class CartController extends Controller
             $cart[$id] = [
                 "name" => $product->nom,
                 "quantity" => 1,
-                "price" => (float) $product->prix,
-                "image" => "products/" . $product->image
+                "price" => $product->prix,
+                "image" => $product->image // Kay-sajel smiyt l-fichier ghir bohdha
             ];
         }
 
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', '🌸 Fleur ajoutée!');
+        return redirect()->route('cart.index')->with('success', 'Fleur ajoutée avec succès! 🌸');
     }
 
-    // Updating quantity (Nouhaiila)
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         if($request->id && $request->quantity){
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', '✨ Panier mis à jour!');
+            return redirect()->back()->with('success', 'Panier mis à jour!');
         }
     }
 
-    // Removing an item from the cart
-    public function remove(Request $request)
-    {
+    public function remove(Request $request) {
         if($request->id) {
             $cart = session()->get('cart');
             if(isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            return redirect()->back()->with('success', '🗑️ Fleur supprimée!');
+            return redirect()->back()->with('success', 'Produit supprimé!');
         }
     }
 }
