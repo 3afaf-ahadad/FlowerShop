@@ -14,10 +14,11 @@ class ProductController extends Controller
         return view('welcome', compact('fleurs'));
     }
 
-
-    public function show($slug) {
+ public function show($slug) {
        $fleurs = Product::all();
         return view('welcome', compact('fleurs'));
     }
+
+ 
 
 }
