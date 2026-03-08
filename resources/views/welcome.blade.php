@@ -55,7 +55,7 @@
             <div class="group bg-white/70 backdrop-blur-md rounded-[3rem] border border-pink-50 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700 flex flex-col">
                 
                 <div class="relative h-72 overflow-hidden bg-pink-50">
-                    <img src="{{ asset('storage/products/' . $fleur->image) }}" 
+                    <img src="{{ asset('storage/' . $fleur->image) }}" 
                          class="w-full h-full object-cover group-hover:scale-110 transition duration-1000 grayscale-[0.1] group-hover:grayscale-0"
                          alt="{{ $fleur->nom }}">
                     
