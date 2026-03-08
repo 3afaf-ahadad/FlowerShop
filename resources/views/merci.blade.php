@@ -2,33 +2,26 @@
 
 @section('content')
 
-<div class="min-h-screen bg-[#fefaf9] flex items-center justify-center py-20">
+<div class="min-h-screen flex items-center justify-center bg-[#fefaf9]">
 
-<div class="max-w-2xl mx-auto text-center bg-white/70 backdrop-blur-md p-16 rounded-[3rem] border border-pink-50 shadow-xl">
+<div class="bg-white p-12 rounded-[3rem] shadow-xl text-center max-w-xl">
 
-<div class="text-6xl mb-6">🌸</div>
-
-<h1 style="font-family: 'Playfair Display', serif;" class="text-4xl italic text-gray-800 mb-4">
-Merci pour votre commande
+<h1 style="font-family: 'Playfair Display', serif;" class="text-4xl text-gray-800 italic mb-6">
+Merci pour votre commande 🌸
 </h1>
 
-<p class="text-gray-500 mb-10">
+<p class="text-gray-500 mb-8">
 Votre commande a été enregistrée avec succès.
+Nous vous contacterons très bientôt.
 </p>
 
 <a href="/"
-class="inline-block bg-pink-500 hover:bg-white hover:text-pink-500 text-white px-10 py-4 rounded-full font-bold text-[10px] uppercase tracking-[0.3em] shadow-xl transition-all duration-500 transform hover:-translate-y-1">
-
+class="bg-pink-500 text-white px-8 py-3 rounded-full text-sm uppercase tracking-widest hover:bg-pink-400 transition">
 Retour à la boutique
-
 </a>
 
 </div>
 
 </div>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:italic,wght@400;700&display=swap');
-</style>
 
 @endsection

@@ -2,6 +2,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
+
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('/', [ProductController::class, 'index']);
 
@@ -16,3 +19,10 @@ Route::patch('/cart/update', [CartController::class, 'update'])->name('cart.upda
 
 // Route bach mat-tla3ch error d checkout
 Route::get('/checkout', function() { return "Page de paiement"; })->name('checkout');
+
+Route::view('/merci','merci')->name('merci');
+
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
+
