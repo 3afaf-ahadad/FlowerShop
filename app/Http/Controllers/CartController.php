@@ -7,13 +7,11 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    // Page dyal l-panier
     public function index() {
         $cart = session()->get('cart', []);
-        return view('cart.index', compact('cart')); // Hna compact('cart') kat-sift $cart l-l-view
+        return view('cart.index', compact('cart'));
     }
 
-    // Ajouter une fleur
     public function add(Request $request, $id) {
         $product = Product::findOrFail($id);
         $cart = session()->get('cart', []);
@@ -29,10 +27,9 @@ class CartController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        return redirect()->route('cart.index')->with('success', 'Fleur ajoutée ! 🌸');
+        return redirect()->route('cart.index')->with('success', 'Fleur ajoutée! 🌸');
     }
 
-    // Modifier la quantité
     public function update(Request $request) {
         $cart = session()->get('cart', []);
         if($request->id && $request->quantity && isset($cart[$request->id])) {
@@ -42,7 +39,6 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    // Supprimer une fleur
     public function remove(Request $request) {
         if($request->id) {
             $cart = session()->get('cart', []);
@@ -52,7 +48,6 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    // Vider le panier
     public function clear() {
         session()->forget('cart');
         return redirect()->route('cart.index');
