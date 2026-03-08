@@ -3,6 +3,43 @@
 @section('content')
 <div class="min-h-screen bg-[#fefaf9] py-12">
     <div class="max-w-6xl mx-auto px-6">
+
+
+
+        <div class="relative w-full h-[600px] mb-24 overflow-hidden rounded-[4rem] shadow-2xl shadow-pink-100/50">
+    <img src="" 
+         class="absolute inset-0 w-full h-full object-cover grayscale-[0.1] hover:grayscale-0 transition duration-1000"
+         alt="Bouquet Signature">
+    
+    <div class="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent flex items-center">
+        <div class="max-w-2xl ml-16 md:ml-24 px-6">
+            <span class="text-pink-300 text-[10px] uppercase tracking-[0.6em] font-semibold mb-4 block">Collection Printemps 2026</span>
+            
+            <h1 style="font-family: 'Playfair Display', serif;" class="text-6xl md:text-7xl italic text-gray-800 leading-tight mb-6">
+                L'élégance à <br>chaque pétale
+            </h1>
+            
+            <p class="text-gray-500 font-serif italic text-lg mb-10 max-w-md leading-relaxed">
+                Découvrez nos compositions artisanales conçues pour transformer vos moments en souvenirs inoubliables.
+            </p>
+            
+            <div class="flex space-x-6">
+                <a href="#produits" class="bg-gray-900 text-white px-10 py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-pink-500 transition-all duration-500 shadow-xl hover:-translate-y-1">
+                    Explorer la Boutique
+                </a>
+                <div class="flex items-center space-x-3">
+                    <span class="h-[1px] w-8 bg-pink-200"></span>
+                    <span class="text-[9px] text-pink-300 uppercase tracking-widest font-bold">Artisan Fleuriste</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="produits"></div>
+
+
+
         
         <div class="text-center mb-16">
             <h1 style="font-family: 'Playfair Display', serif;" class="text-5xl italic text-gray-800 mb-3">Nos Magnifiques Bouquets</h1>
