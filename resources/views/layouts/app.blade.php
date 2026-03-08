@@ -17,7 +17,7 @@
             <a href="{{ route('products.index') }}" class="font-serif text-2xl italic tracking-tighter">FlowerAtelier</a>
             
             <div class="flex items-center space-x-8 text-[11px] uppercase tracking-[0.2em] font-semibold text-gray-500">
-                <a href="{{ route('cart.index') }}" class="hover:text-pink-400 transition">Boutique</a>
+                <a href="{{ route('products.index') }}" class="hover:text-pink-400 transition">Boutique</a>
                 <a href="{{ route('cart.index') }}" class="flex items-center group">
                     <span class="mr-2">Panier</span>
                     <div class="relative">
