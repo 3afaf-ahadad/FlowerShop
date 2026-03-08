@@ -1,4 +1,4 @@
-<form action="{{ route('order.store') }}" method="POST">
+<form action="{{ route('checkout.store') }}" method="POST">
     @csrf
 
     <input type="text" name="nom" placeholder="Nom" required>
@@ -7,4 +7,5 @@
     <input type="text" name="telephone" placeholder="Telephone" required>
 
     <button type="submit">Commander</button>
+
 </form>

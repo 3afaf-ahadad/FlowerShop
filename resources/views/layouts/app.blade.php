@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Atelier Floral</title>
+    <title>🌸 Mon Atelier Floral 🌸</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:italic,wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body { background-color: #fefaf9; font-family: 'Montserrat', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
@@ -15,11 +14,11 @@
 
     <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-pink-50">
         <div class="max-w-6xl mx-auto px-8 h-20 flex justify-between items-center">
-            <a href="/" class="font-serif text-2xl italic tracking-tighter">FlowerAtelier</a>
+            <a href="{{ route('products.index') }}" class="font-serif text-2xl italic tracking-tighter">FlowerAtelier</a>
             
             <div class="flex items-center space-x-8 text-[11px] uppercase tracking-[0.2em] font-semibold text-gray-500">
-                <a href="/" class="hover:text-pink-400 transition">Boutique</a>
-                <a href="/cart" class="flex items-center group">
+                <a href="{{ route('cart.index') }}" class="hover:text-pink-400 transition">Boutique</a>
+                <a href="{{ route('cart.index') }}" class="flex items-center group">
                     <span class="mr-2">Panier</span>
                     <div class="relative">
                         <svg class="w-5 h-5 group-hover:text-pink-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>

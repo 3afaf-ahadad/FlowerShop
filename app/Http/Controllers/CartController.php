@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product; 
+use App\Models\Product;
 
 class CartController extends Controller
 {
+
     // Displaying the cart page
     public function index()
     {
@@ -27,7 +28,7 @@ class CartController extends Controller
                 "name" => $product->nom,
                 "quantity" => 1,
                 "price" => (float) $product->prix,
-                "image" => $product->image
+                "image" => "products/" . $product->image
             ];
         }
 
@@ -46,7 +47,7 @@ class CartController extends Controller
         }
     }
 
-    // Remove=ing an item from the cart
+    // Removing an item from the cart
     public function remove(Request $request)
     {
         if($request->id) {

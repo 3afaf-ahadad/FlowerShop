@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
             'description' => 'Un bouquet élégant de roses roses pâles, parfait pour un mariage chic.',
             'prix' => 45.00,
             'stock' => 15,
-            'image' => 'rose_poudree.jpg',
+            'image' => 'products/rose_poudree.jpg',
             'categorie_id' => $mariage->id,
         ]);
 
@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
             'description' => 'La reine des fleurs dans une teinte rose fuchsia éclatante.',
             'prix' => 60.00,
             'stock' => 8,
-            'image' => 'pivoine_royale.jpg',
+            'image' => 'products/pivoine_royale.jpg',
             'categorie_id' => $romantique->id,
         ]);
 
@@ -45,7 +45,7 @@ class ProductSeeder extends Seeder
             'description' => 'Notre signature : un mélange de roses et de fleurs blanches.',
             'prix' => 55.00,
             'stock' => 10,
-            'image' => 'eclat_rose.jpg',
+            'image' => 'products/eclat_rose.jpg',
             'categorie_id' => $mariage->id,
         ]);
 
@@ -56,7 +56,7 @@ class ProductSeeder extends Seeder
             'description' => 'A bundle of elegant Ivory Tulips.',
             'prix' => 120.00,
             'stock' => 15,
-            'image' => 'ivory_tulips.jpg',
+            'image' => 'products/ivory_tulips.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
             'description' => 'A rustic arrangement of Blue Hydrangeas.',
             'prix' => 150.00,
             'stock' => 10,
-            'image' => 'blue_hydrangeas.jpg',
+            'image' => 'products/blue_hydrangeas.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -76,7 +76,7 @@ class ProductSeeder extends Seeder
             'description' => 'A modern bouquet of mixed Succulents & Eucalyptus.',
             'prix' => 200.00,
             'stock' => 8,
-            'image' => 'succulents_eucalyptus.jpg',
+            'image' => 'products/succulents_eucalyptus.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -86,7 +86,7 @@ class ProductSeeder extends Seeder
             'description' => 'A bright cluster of Sunflower petals.',
             'prix' => 90.00,
             'stock' => 20,
-            'image' => 'sunflowers.jpg',
+            'image' => 'products/sunflowers.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -96,7 +96,7 @@ class ProductSeeder extends Seeder
             'description' => 'A soft bunch of purple Lavender & Baby\'s Breath.',
             'prix' => 110.00,
             'stock' => 25,
-            'image' => 'lavender_babys_breath.jpg',
+            'image' => 'products/lavender_babys_breath.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -106,7 +106,7 @@ class ProductSeeder extends Seeder
             'description' => 'A minimalist stem of a white Orchid.',
             'prix' => 300.00,
             'stock' => 5,
-            'image' => 'white_orchid.jpg',
+            'image' => 'products/white_orchid.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -116,7 +116,7 @@ class ProductSeeder extends Seeder
             'description' => 'A complex bouquet of dark red Ranunculus.',
             'prix' => 180.00,
             'stock' => 12,
-            'image' => 'red_ranunculus.jpg',
+            'image' => 'products/red_ranunculus.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -126,7 +126,7 @@ class ProductSeeder extends Seeder
             'description' => 'A cheerful mix of multi-colored Gerbera Daisies.',
             'prix' => 85.00,
             'stock' => 30,
-            'image' => 'gerbera_daisies.jpg',
+            'image' => 'products/gerbera_daisies.jpg',
             'categorie_id' => $collection->id,
         ]);
 
@@ -136,7 +136,7 @@ class ProductSeeder extends Seeder
             'description' => 'A stylized branch of Cherry Blossoms.',
             'prix' => 250.00,
             'stock' => 7,
-            'image' => 'cherry_blossoms.jpg',
+            'image' => 'products/cherry_blossoms.jpg',
             'categorie_id' => $collection->id,
         ]);
     }
