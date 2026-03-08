@@ -1,45 +1,97 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#fefaf9] py-12">
-    <div class="max-w-4xl mx-auto px-6">
-        <div class="text-center mb-16">
-            <h1 style="font-family: 'Playfair Display', serif;" class="text-5xl italic text-gray-800 mb-3">Finaliser votre commande</h1>
-            <div class="flex justify-center items-center space-x-2">
-                <span class="h-[1px] w-8 bg-pink-100"></span>
-                <span class="text-pink-300 text-[10px] uppercase tracking-[0.4em] font-semibold">L'Atelier des Fleurs</span>
-                <span class="h-[1px] w-8 bg-pink-100"></span>
-            </div>
-        </div>
+<div class="relative min-h-[80vh] flex items-center bg-[#fffafa]">
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent z-10"></div>
+        {{-- Tqdri t-bdli had l-image b chi waheda 3ndek f public/images --}}
+        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" 
+             class="w-full h-full object-cover opacity-80" alt="Hero Flower">
+    </div>
 
-        <div class="bg-white/70 backdrop-blur-md p-10 rounded-[3rem] border border-pink-50 shadow-xl">
-            <form action="{{ route('order.store') }}" method="POST">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="text-[10px] text-pink-400 uppercase tracking-widest font-bold">Nom</label>
-                        <input type="text" name="nom" required class="w-full mt-2 p-4 rounded-2xl border border-pink-100 bg-[#fdf2f5] focus:outline-none focus:border-pink-300">
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-pink-400 uppercase tracking-widest font-bold">Prénom</label>
-                        <input type="text" name="prenom" required class="w-full mt-2 p-4 rounded-2xl border border-pink-100 bg-[#fdf2f5] focus:outline-none focus:border-pink-300">
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <label class="text-[10px] text-pink-400 uppercase tracking-widest font-bold">Adresse</label>
-                    <input type="text" name="adresse" required class="w-full mt-2 p-4 rounded-2xl border border-pink-100 bg-[#fdf2f5] focus:outline-none focus:border-pink-300">
-                </div>
-                <div class="mt-6">
-                    <label class="text-[10px] text-pink-400 uppercase tracking-widest font-bold">Téléphone</label>
-                    <input type="text" name="telephone" required class="w-full mt-2 p-4 rounded-2xl border border-pink-100 bg-[#fdf2f5] focus:outline-none focus:border-pink-300">
-                </div>
-                <div class="mt-12 text-center">
-                    <button type="submit" class="bg-pink-500 hover:bg-gray-900 text-white px-12 py-5 rounded-full font-bold text-[10px] uppercase tracking-[0.3em] shadow-xl transition-all duration-500 transform hover:-translate-y-1">
-                        Valider la commande
-                    </button>
-                </div>
-            </form>
+    <div class="max-w-7xl mx-auto px-8 relative z-20">
+        <span class="text-pink-300 text-[11px] uppercase tracking-[0.7em] font-bold mb-6 block animate-fade-in">Collection Signature 2026</span>
+        <h1 style="font-family: 'Playfair Display', serif;" class="text-7xl md:text-8xl italic text-gray-800 leading-tight mb-8">
+            Poésie f <br><span class="text-pink-400">chaque Bouquet</span>
+        </h1>
+        <p class="text-gray-500 font-serif italic text-xl mb-12 max-w-lg leading-relaxed">
+            Des compositions artisanales nées de la passion, livrées avec tendresse chez vous.
+        </p>
+        <div class="flex items-center space-x-8">
+            <a href="#boutique" class="bg-gray-900 text-white px-12 py-5 rounded-full font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-pink-400 transition-all duration-700 shadow-2xl hover:-translate-y-2">
+                Découvrir l'Atelier
+            </a>
+            <div class="hidden md:flex items-center space-x-3 text-pink-200">
+                <span class="h-[1px] w-12 bg-current"></span>
+                <span class="text-[9px] uppercase tracking-widest font-black">Luxe & Nature</span>
+            </div>
         </div>
     </div>
 </div>
+
+<div id="boutique" class="bg-[#fefaf9] py-32">
+    <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="text-center mb-28">
+            <h2 style="font-family: 'Playfair Display', serif;" class="text-5xl italic text-gray-800 mb-4">L'Éclat de Rose</h2>
+            <div class="flex justify-center items-center space-x-4">
+                <span class="h-[1px] w-12 bg-pink-100"></span>
+                <div class="w-2 h-2 rounded-full bg-pink-200"></div>
+                <span class="h-[1px] w-12 bg-pink-100"></span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32">
+            @foreach($fleurs as $product)
+            <div class="group flex flex-col">
+                {{-- Card Image --}}
+                <div class="relative aspect-[3/4] rounded-[4rem] overflow-hidden bg-white shadow-sm group-hover:shadow-2xl transition-all duration-1000 border border-pink-50/50">
+                    <img src="{{ asset('storage/' . $product->image) }}" 
+                         class="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-110 transition duration-[1.5s] ease-out">
+                    
+                    <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST" 
+                          class="absolute inset-x-10 bottom-10 translate-y-20 group-hover:translate-y-0 transition-all duration-700 ease-out z-30">
+                        @csrf
+                        <button type="submit" class="w-full bg-white/90 backdrop-blur-md text-gray-900 py-5 rounded-3xl font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-pink-500 hover:text-white transition-all shadow-xl">
+                            Ajouter au Panier
+                        </button>
+                    </form>
+                </div>
+
+                {{-- Info Produit --}}
+                <div class="mt-12 text-center">
+                    <span class="text-[9px] text-pink-300 uppercase tracking-[0.5em] font-bold block mb-4 italic">Artisanal</span>
+                    <h3 style="font-family: 'Playfair Display', serif;" class="text-3xl text-gray-800 italic mb-4 group-hover:text-pink-400 transition-colors duration-500">
+                        {{ $product->nom }}
+                    </h3>
+                    <div class="flex items-center justify-center space-x-4">
+                        <span class="h-[1px] w-4 bg-gray-200 group-hover:w-8 transition-all duration-700"></span>
+                        <span class="text-xl font-light text-gray-500 italic tracking-tighter">
+                            {{ number_format($product->prix, 2, '.', ' ') }} DH
+                        </span>
+                        <span class="h-[1px] w-4 bg-gray-200 group-hover:w-8 transition-all duration-700"></span>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:italic,wght@400;700&display=swap');
+    
+    html { scroll-behavior: smooth; }
+    
+    .animate-fade-in {
+        animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 @endsection

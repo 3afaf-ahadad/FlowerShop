@@ -7,17 +7,14 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-
-    // Displaying the cart page
-    public function index()
-    {
+    // Page dyal l-panier
+    public function index() {
         $cart = session()->get('cart', []);
-        return view('cart.index', compact('cart'));
+        return view('cart.index', compact('cart')); // Hna compact('cart') kat-sift $cart l-l-view
     }
 
-    // Adding a flower to the session
-    public function add(Request $request, $id)
-    {
+    // Ajouter une fleur
+    public function add(Request $request, $id) {
         $product = Product::findOrFail($id);
         $cart = session()->get('cart', []);
 
@@ -25,38 +22,39 @@ class CartController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
-                "name" => $product->nom,
+                "name" => $product->name,
                 "quantity" => 1,
-                "price" => (float) $product->prix,
-                "image" => "products/" . $product->image
+                "price" => (float) $product->price,
+                "image" => $product->image
             ];
         }
-
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', '🌸 Fleur ajoutée!');
+        return redirect()->route('cart.index')->with('success', 'Fleur ajoutée ! 🌸');
     }
 
-    // Updating quantity (Nouhaiila)
-    public function update(Request $request)
-    {
-        if($request->id && $request->quantity){
-            $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
+    // Modifier la quantité
+    public function update(Request $request) {
+        $cart = session()->get('cart', []);
+        if($request->id && $request->quantity && isset($cart[$request->id])) {
+            $cart[$request->id]["quantity"] = (int) $request->quantity;
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', '✨ Panier mis à jour!');
         }
+        return redirect()->back();
     }
 
-    // Removing an item from the cart
-    public function remove(Request $request)
-    {
+    // Supprimer une fleur
+    public function remove(Request $request) {
         if($request->id) {
-            $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
-                unset($cart[$request->id]);
-                session()->put('cart', $cart);
-            }
-            return redirect()->back()->with('success', '🗑️ Fleur supprimée!');
+            $cart = session()->get('cart', []);
+            unset($cart[$request->id]);
+            session()->put('cart', $cart);
         }
+        return redirect()->back();
+    }
+
+    // Vider le panier
+    public function clear() {
+        session()->forget('cart');
+        return redirect()->route('cart.index');
     }
 }
