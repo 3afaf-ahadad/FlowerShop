@@ -34,7 +34,7 @@
                         @endphp
                         <tr class="hover:bg-gray-50/50 transition">
                             <td class="p-6 flex items-center gap-4">
-                                <img src="{{ asset('storage/products/' . $details['image']) }}" class="w-16 h-16 object-cover rounded-2xl shadow-sm">
+                                <img src="{{ asset('storage/' . $details['image']) }}" class="w-16 h-16 object-cover rounded-2xl shadow-sm">
                                 <span class="font-semibold text-gray-800">{{ $details['name'] }}</span>
                             </td>
                             <td class="p-6 text-center text-gray-600">{{ $price }} DH</td>
