@@ -50,9 +50,31 @@
         @yield('content')
     </main>
 
-    <footer class="py-12 text-center border-t border-pink-50 mt-20">
-        <p class="font-serif italic text-gray-400 text-sm">Designé avec amour pour Nouhaila</p>
-    </footer>
+   <footer class="py-16 text-center border-t border-pink-50 mt-20 bg-white/30 backdrop-blur-sm">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="mb-8">
+            <h2 style="font-family: 'Playfair Display', serif;" class="text-3xl italic text-pink-300 mb-2">L'Atelier des Fleurs</h2>
+            <div class="flex justify-center items-center space-x-2">
+                <span class="h-[1px] w-4 bg-pink-100"></span>
+                <span class="text-[8px] text-gray-400 uppercase tracking-[0.5em] font-medium">Créations Artisanales</span>
+                <span class="h-[1px] w-4 bg-pink-100"></span>
+            </div>
+        </div>
+
+        <p class="font-serif italic text-gray-500 text-sm mb-6 leading-relaxed">
+            Conçu avec amour par l'équipe :<br>
+            <span class="text-gray-400 not-italic uppercase tracking-widest text-[10px]">
+                Afaf &bull; Nouhaila &bull; Ghita &bull; Soukaina &bull; Farah
+            </span>
+        </p>
+
+        <div class="pt-8 border-t border-pink-50/50">
+            <p class="text-[9px] text-gray-300 uppercase tracking-widest">
+                &copy; {{ date('Y') }} FleurShop &mdash; Tous droits réservés.
+            </p>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
