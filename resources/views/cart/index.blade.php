@@ -13,17 +13,17 @@
             </div>
         </div>
 
-        @if(isset($cart) && count($cart) > 0)
-            @php $total = 0; @endphp {{-- Fix darouri bach may-tla3ch error 500 --}}
+        @if(session('cart') && count(session('cart')) > 0)
+            @php $total = 0; @endphp
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div class="lg:col-span-8 space-y-6">
-                    @foreach($cart as $id => $details)
+                    @foreach(session('cart') as $id => $details)
                         @php $total += $details['price'] * $details['quantity'] @endphp
                         
                         <div class="group bg-white/70 backdrop-blur-md p-6 rounded-[2.5rem] border border-pink-50 flex items-center shadow-sm hover:shadow-xl transition-all duration-700">
                             <div class="w-28 h-28 rounded-3xl overflow-hidden shadow-inner flex-shrink-0 bg-pink-50">
-                                <img src="{{ $details['image'] }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000 grayscale-[0.2] group-hover:grayscale-0">
+                                <img src="{{ asset('storage/' . $details['image']) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000 grayscale-[0.2] group-hover:grayscale-0">
                             </div>
                             
                             <div class="ml-8 flex-1">
@@ -35,7 +35,7 @@
                                     <form action="{{ route('cart.remove') }}" method="POST">
                                         @csrf @method('DELETE')
                                         <input type="hidden" name="id" value="{{ $id }}">
-                                        <button class="text-gray-200 hover:text-pink-400 transition-colors">
+                                        <button type="submit" class="text-gray-200 hover:text-pink-400 transition-colors">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
                                         </button>
                                     </form>
@@ -47,9 +47,7 @@
                                         <form action="{{ route('cart.update') }}" method="POST">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="id" value="{{ $id }}">
-                                            <input type="number" name="quantity" value="{{ $details['quantity'] }}" 
-                                                   onchange="this.form.submit()"
-                                                   class="bg-transparent w-8 text-center text-xs font-black text-pink-600 focus:outline-none">
+                                            <input type="number" name="quantity" value="{{ $details['quantity'] }}" onchange="this.form.submit()" class="bg-transparent w-8 text-center text-xs font-black text-pink-600 focus:outline-none">
                                         </form>
                                     </div>
                                     <span class="font-serif text-xl text-gray-700 font-light">{{ $details['price'] * $details['quantity'] }} DH</span>
@@ -60,47 +58,31 @@
                 </div>
 
                 <div class="lg:col-span-4">
-                    <div class="bg-gray-900 p-10 rounded-[3rem] text-white sticky top-32 shadow-2xl shadow-pink-200/20 overflow-hidden relative">
-                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-500/10 rounded-full blur-3xl"></div>
-                        
+                    <div class="bg-gray-900 p-10 rounded-[3rem] text-white sticky top-32 shadow-2xl relative">
                         <h2 class="font-serif text-3xl italic mb-10 border-b border-gray-800 pb-6">Sommaire</h2>
-                        
                         <div class="space-y-5 mb-12">
                             <div class="flex justify-between text-sm text-gray-400 italic">
                                 <span>Sous-total</span>
-                                <span>{{ $total }} DH</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-400 italic">Livraison Standard</span>
-                                <span class="text-[9px] bg-pink-500/20 text-pink-300 px-3 py-1 rounded-full uppercase tracking-widest font-bold">Gratuite</span>
+                                <span>{{ number_format($total, 2) }} DH</span>
                             </div>
                             <div class="pt-8 border-t border-gray-800 flex justify-between items-end">
                                 <span class="font-serif text-lg italic text-gray-300">Total TTC</span>
-                                <span class="text-4xl font-light text-pink-400">{{ $total }} DH</span>
+                                <span class="text-4xl font-light text-pink-400">{{ number_format($total, 2) }} DH</span>
                             </div>
                         </div>
 
-                        <button class="w-full bg-pink-500 hover:bg-white hover:text-pink-500 text-white py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.3em] shadow-xl transition-all duration-500 transform hover:-translate-y-1">
+                        <a href="{{ route('checkout') }}" class="block w-full text-center bg-pink-500 text-white py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-white hover:text-pink-500 transition-all duration-500">
                             Valider la commande
-                        </button>
-                        
-                        <p class="text-[9px] text-gray-500 mt-8 text-center uppercase tracking-tighter">Paiement sécurisé par SSL</p>
+                        </a>
                     </div>
                 </div>
             </div>
         @else
-            <div class="text-center py-40 bg-white/50 rounded-[4rem] border border-dashed border-pink-100">
-                <div class="text-6xl mb-6 opacity-40">🌸</div>
-                <p class="font-serif text-3xl italic text-gray-400 mb-8">Votre panier est encore en fleurs...</p>
-                <a href="/" class="px-10 py-4 bg-pink-400 text-white rounded-full font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-gray-800 transition shadow-lg shadow-pink-200">
-                    Découvrir l'Atelier
-                </a>
+            <div class="text-center py-40">
+                <p class="font-serif text-3xl italic text-gray-400 mb-8">Votre panier est vide.</p>
+                <a href="{{ url('/') }}" class="bg-pink-400 text-white px-8 py-3 rounded-full uppercase text-[10px] font-bold tracking-widest">Retour Boutique</a>
             </div>
         @endif
     </div>
 </div>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:italic,wght@400;700&display=swap');
-</style>
 @endsection
