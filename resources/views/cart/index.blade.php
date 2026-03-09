@@ -63,9 +63,10 @@
                             @endforeach
                             {{ number_format($total, 2) }} <span class="text-xs">DH</span>
                         </h2>
-                        <button class="w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95">
-                            Commander ✨
-                        </button>
+                        <a href="{{ route('checkout') }}"
+class="block text-center w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95">
+Commander ✨
+</a>
                     </div>
                 </div>
             </div>

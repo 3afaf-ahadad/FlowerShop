@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
+
 Route::get('/', [ProductController::class, 'index']);
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -16,7 +16,3 @@ Route::patch('/cart/update', [CartController::class, 'update'])->name('cart.upda
 
 // 
 Route::get('/checkout', function() { return "Page de paiement"; })->name('checkout');
-//
-
-Route::get('/', [ProductController::class, 'index']);
-Route::resource('admin/products', AdminProductController::class);
