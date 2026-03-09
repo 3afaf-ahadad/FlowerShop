@@ -16,3 +16,5 @@ Route::patch('/cart/update', [CartController::class, 'update'])->name('cart.upda
 
 // 
 Route::get('/checkout', function() { return "Page de paiement"; })->name('checkout');
+// Route bach n-choufou detail dyal kol fleur
+Route::get('/product/{slug}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');

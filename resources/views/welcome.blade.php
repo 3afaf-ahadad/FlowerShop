@@ -31,7 +31,7 @@
         @endif
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 md:gap-14">
-            @foreach($products as $product)
+            @foreach($fleurs as $product)
                 <div class="group flex flex-col items-center">
                     
                     <div class="relative w-full aspect-[4/5] overflow-hidden rounded-[3rem] bg-gray-50 shadow-sm transition-all duration-700 group-hover:shadow-2xl group-hover:-translate-y-2">
