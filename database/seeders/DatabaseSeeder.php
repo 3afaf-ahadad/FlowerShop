@@ -18,3 +18,8 @@ class DatabaseSeeder extends Seeder
 
     }
 }
+\App\Models\User::factory()->create([
+    'name' => 'Saadia Admin',
+    'email' => 'admin@rose.com',
+    'password' => bcrypt('password123'),
+]);
