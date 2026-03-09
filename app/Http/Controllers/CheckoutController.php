@@ -17,25 +17,33 @@ public function index()
 
 public function store(Request $request)
 {
-    $request->validate([
-        'nom'=>'required',
-        'email'=>'required|email',
-        'adresse'=>'required'
-    ]);
 
-    $cart = session()->get('cart', []);
+$request->validate([
+'nom' => 'required',
+'email' => 'required|email',
+'telephone' => 'required',
+'adresse' => 'required'
+]);
 
-    $total = 0;
+$cart = session()->get('cart', []);
 
-    foreach($cart as $item){
-        $total += $item['price'] * $item['quantity'];
-    }
+$total = 0;
 
-    session()->forget('cart');
-
-    return redirect()->route('merci')->with('total',$total);
+foreach($cart as $item){
+$total += $item['price'] * $item['quantity'];
 }
 
+$reference = 'CMD'.rand(1000,9999);
+
+session()->put('order_reference', $reference);
+session()->put('order_cart', $cart);
+session()->put('order_total', $total);
+
+session()->forget('cart');
+
+return redirect()->route('confirmation');
+
+}
 public function merci()
 {
     return view('merci');

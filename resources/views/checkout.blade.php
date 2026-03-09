@@ -1,118 +1,59 @@
-<?php
+@extends('layouts.app')
 
-<<<<<<< HEAD
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
-=======
 @section('content')
 
-<<<<<<< HEAD
-<div class="min-h-screen bg-[#fefaf9] py-12 flex items-center justify-center">
+<div class="min-h-screen checkout-bg py-16 flex items-center justify-center">
 
-<div class="w-full max-w-5xl bg-white p-10 rounded-[3rem] shadow-xl border border-pink-50">
+<div class="w-full max-w-6xl checkout-card p-12">
 
-<div class="text-center mb-10">
-<h1 class="text-4xl italic text-gray-800 mb-3">Finaliser la commande</h1>
-<p class="text-pink-300 text-xs uppercase tracking-[0.3em]">L'Atelier des Fleurs</p>
-=======
-        <div class="text-center mb-16">
-            <h1 style="font-family: 'Playfair Display', serif;" class="text-5xl italic text-gray-800 mb-3">
-                Finaliser la Commande
-            </h1>
->>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
+<div class="text-center mb-14">
+<h1 class="checkout-title text-5xl mb-4">Finaliser la commande</h1>
 
-// 1. Boutique
-Route::get('/', [ProductController::class, 'index'])->name('products.index');
-
-<<<<<<< HEAD
-// 2. Le Panier (Cart) - Modifié pour supporter Update & Remove
-Route::prefix('cart')->group(function () {
-    Route::get('/', [CartController::class, 'index'])->name('cart.index');
-    Route::get('/add/{id}', [CartController::class, 'add'])->name('cart.add'); // Rej3naha GET bach t-koun sahla
-    Route::patch('/update', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/remove', [CartController::class, 'remove'])->name('cart.remove');
-});
-
-// 3. Checkout
-Route::get('/checkout', function () {
-    return view('checkout');
-})->name('checkout');
-
-// 4. Store Order
-Route::post('/order', function () {
-    return "Commande Validée !";
-})->name('order.store');
-=======
-        <div class="bg-white/70 backdrop-blur-md p-12 rounded-[3rem] border border-pink-50 shadow-xl">
-
-            <form action="{{ route('checkout.store') }}" method="POST" class="space-y-6">
-                @csrf
-
-                <input type="text" name="nom" placeholder="Nom" required
-                class="w-full border border-pink-100 rounded-full px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-200 bg-[#fdf2f5]">
-
-                <input type="text" name="prenom" placeholder="Prenom" required
-                class="w-full border border-pink-100 rounded-full px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-200 bg-[#fdf2f5]">
-
-                <input type="email" name="email" placeholder="Email" required
-                class="w-full border border-pink-100 rounded-full px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-200 bg-[#fdf2f5]">
-
-                <input type="text" name="telephone" placeholder="Telephone" required
-                class="w-full border border-pink-100 rounded-full px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-200 bg-[#fdf2f5]">
-
-                <input type="text" name="adresse" placeholder="Adresse" required
-                class="w-full border border-pink-100 rounded-full px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-200 bg-[#fdf2f5]">
-
-                <input type="text" name="ville" placeholder="Ville" required
-                class="w-full border border-pink-100 rounded-full px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-200 bg-[#fdf2f5]">
-
-                <button type="submit"
-                class="w-full bg-pink-500 hover:bg-white hover:text-pink-500 text-white py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.3em] shadow-xl transition-all duration-500 transform hover:-translate-y-1">
-                    Commander
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
->>>>>>> 430b2006d96f28ada93195531ac617eb2b7f8a4a
+<div class="flex justify-center items-center space-x-3">
+<span class="line"></span>
+<p class="brand">L'Atelier des Fleurs</p>
+<span class="line"></span>
 </div>
 
-<div class="grid md:grid-cols-2 gap-10">
+</div>
+
+<div class="grid md:grid-cols-2 gap-14">
 
 <!-- FORM -->
 
-<form action="{{ route('checkout.store') }}" method="POST" class="space-y-5">
-
+<form action="{{ route('checkout.store') }}" method="POST" class="space-y-6">
 @csrf
 
-<input type="text" name="nom" placeholder="Nom" required
-class="w-full border border-pink-200 rounded-full px-6 py-3 focus:ring-2 focus:ring-pink-300">
+<div class="input-group">
+<input type="text" name="nom" placeholder="Nom complet" required>
+</div>
 
-<input type="email" name="email" placeholder="Email" required
-class="w-full border border-pink-200 rounded-full px-6 py-3 focus:ring-2 focus:ring-pink-300">
+<div class="input-group">
+<input type="email" name="email" placeholder="Email" required>
+</div>
 
-<input type="text" name="telephone" placeholder="Téléphone" required
-class="w-full border border-pink-200 rounded-full px-6 py-3 focus:ring-2 focus:ring-pink-300">
+<div class="input-group">
+<input type="text" name="telephone" placeholder="Téléphone" required>
+</div>
 
-<input type="text" name="adresse" placeholder="Adresse" required
-class="w-full border border-pink-200 rounded-full px-6 py-3 focus:ring-2 focus:ring-pink-300">
+<div class="input-group">
+<input type="text" name="adresse" placeholder="Adresse de livraison" required>
+</div>
 
-<button type="submit"
-class="w-full bg-pink-500 text-white py-4 rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-pink-600 transition">
+<button type="submit" class="checkout-btn">
 Valider la commande
 </button>
+
+<p class="secure">Paiement sécurisé • SSL</p>
 
 </form>
 
 
 <!-- RESUME -->
 
-<div class="bg-gray-50 p-6 rounded-2xl">
+<div class="resume-card">
 
-<h2 class="font-bold mb-6 text-gray-700">Résumé de la commande</h2>
+<h2 class="resume-title">Résumé de la commande</h2>
 
 @php $total = 0; @endphp
 
@@ -120,13 +61,14 @@ Valider la commande
 
 @foreach(session('cart') as $item)
 
-<div class="flex justify-between mb-3">
+<div class="resume-item">
 
-<span class="text-gray-600">
-{{ $item['name'] }} x {{ $item['quantity'] }}
-</span>
+<div>
+<p class="product-name">{{ $item['name'] }}</p>
+<span class="product-qty">Quantité: {{ $item['quantity'] }}</span>
+</div>
 
-<span class="font-bold text-gray-800">
+<span class="price">
 {{ $item['price'] * $item['quantity'] }} DH
 </span>
 
@@ -138,12 +80,12 @@ Valider la commande
 
 @endif
 
-<hr class="my-4">
+<div class="resume-divider"></div>
 
-<div class="flex justify-between font-bold text-lg">
+<div class="resume-total">
 
 <span>Total</span>
-<span>{{ $total }} DH</span>
+<span class="total-price">{{ $total }} DH</span>
 
 </div>
 
@@ -154,6 +96,151 @@ Valider la commande
 </div>
 
 </div>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+
+.checkout-bg{
+background:#fefaf9;
+font-family:'Inter',sans-serif;
+}
+
+.checkout-card{
+background:white;
+border-radius:3rem;
+box-shadow:0 30px 60px rgba(0,0,0,0.06);
+border:1px solid #fde8ef;
+}
+
+.checkout-title{
+font-family:'Playfair Display',serif;
+font-style:italic;
+color:#1f2937;
+}
+
+.brand{
+font-size:11px;
+letter-spacing:0.4em;
+text-transform:uppercase;
+color:#f9a8d4;
+font-weight:600;
+}
+
+.line{
+height:1px;
+width:40px;
+background:#fbcfe8;
+}
+
+/* Inputs */
+
+.input-group input{
+width:100%;
+border:1px solid #fbcfe8;
+padding:16px 22px;
+border-radius:40px;
+font-size:14px;
+transition:all .3s;
+background:#fff;
+}
+
+.input-group input:focus{
+outline:none;
+border-color:#f472b6;
+box-shadow:0 0 0 4px rgba(244,114,182,0.15);
+}
+
+/* Button */
+
+.checkout-btn{
+width:100%;
+background:#ec4899;
+color:white;
+padding:18px;
+border-radius:18px;
+font-size:12px;
+letter-spacing:.3em;
+text-transform:uppercase;
+font-weight:700;
+transition:.4s;
+box-shadow:0 15px 30px rgba(236,72,153,.3);
+}
+
+.checkout-btn:hover{
+background:#db2777;
+transform:translateY(-3px);
+}
+
+/* Secure text */
+
+.secure{
+text-align:center;
+font-size:10px;
+margin-top:10px;
+letter-spacing:.15em;
+text-transform:uppercase;
+color:#9ca3af;
+}
+
+/* Resume */
+
+.resume-card{
+background:#fafafa;
+padding:30px;
+border-radius:25px;
+border:1px solid #f3f4f6;
+}
+
+.resume-title{
+font-weight:700;
+margin-bottom:25px;
+color:#374151;
+}
+
+.resume-item{
+display:flex;
+justify-content:space-between;
+margin-bottom:16px;
+align-items:center;
+}
+
+.product-name{
+font-size:14px;
+color:#374151;
+font-weight:500;
+}
+
+.product-qty{
+font-size:11px;
+color:#9ca3af;
+}
+
+.price{
+font-weight:700;
+color:#111827;
+}
+
+.resume-divider{
+height:1px;
+background:#e5e7eb;
+margin:25px 0;
+}
+
+.resume-total{
+display:flex;
+justify-content:space-between;
+font-size:18px;
+font-weight:700;
+}
+
+.total-price{
+color:#ec4899;
+font-size:22px;
+font-family:'Playfair Display',serif;
+}
+
+</style>
 
 @endsection
->>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
