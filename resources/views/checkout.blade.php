@@ -1,5 +1,10 @@
-@extends('layouts.app')
+<?php
 
+<<<<<<< HEAD
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+=======
 @section('content')
 <div class="min-h-screen bg-[#fefaf9] py-16">
     <div class="max-w-3xl mx-auto px-6">
@@ -8,16 +13,30 @@
             <h1 style="font-family: 'Playfair Display', serif;" class="text-5xl italic text-gray-800 mb-3">
                 Finaliser la Commande
             </h1>
+>>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
 
-            <div class="flex justify-center items-center space-x-2">
-                <span class="h-[1px] w-8 bg-pink-100"></span>
-                <span class="text-pink-300 text-[10px] uppercase tracking-[0.4em] font-semibold">
-                    L'Atelier des Fleurs
-                </span>
-                <span class="h-[1px] w-8 bg-pink-100"></span>
-            </div>
-        </div>
+// 1. Boutique
+Route::get('/', [ProductController::class, 'index'])->name('products.index');
 
+<<<<<<< HEAD
+// 2. Le Panier (Cart) - Modifié pour supporter Update & Remove
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/add/{id}', [CartController::class, 'add'])->name('cart.add'); // Rej3naha GET bach t-koun sahla
+    Route::patch('/update', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/remove', [CartController::class, 'remove'])->name('cart.remove');
+});
+
+// 3. Checkout
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
+
+// 4. Store Order
+Route::post('/order', function () {
+    return "Commande Validée !";
+})->name('order.store');
+=======
         <div class="bg-white/70 backdrop-blur-md p-12 rounded-[3rem] border border-pink-50 shadow-xl">
 
             <form action="{{ route('checkout.store') }}" method="POST" class="space-y-6">
@@ -58,3 +77,4 @@
 </style>
 
 @endsection
+>>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
