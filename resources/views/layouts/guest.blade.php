@@ -22,12 +22,6 @@
                 </a>
             </div>
 
-            <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-pink-50">
-    <button class="bg-[#D4AF37] hover:bg-[#B8860B] text-white font-bold py-2 px-4 rounded">
-        Login
-    </button>
-</div>
-
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
