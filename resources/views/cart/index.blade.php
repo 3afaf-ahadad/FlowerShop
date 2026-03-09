@@ -64,11 +64,18 @@
                             @endforeach
                             {{ number_format($total, 2) }} <span class="text-xs">DH</span>
                         </h2>
+<<<<<<< HEAD
                         <button class="w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95">
                            <a href="{{ route('checkout') }}" class="btn btn-primary">
     Commander Maintenant 🌸
 </a>
                         </button>
+=======
+                        <a href="{{ route('checkout') }}"
+class="block text-center w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95">
+Commander ✨
+</a>
+>>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
                     </div>
                 </div>
             </div>

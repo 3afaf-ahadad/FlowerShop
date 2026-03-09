@@ -25,6 +25,7 @@ class OrderController extends Controller
         return view('checkout', compact('cart')); // Khass t-koun 3ndek view smitha checkout.blade.php
     }
     public function store(Request $request)
+<<<<<<< HEAD
     {
         // 1. Validation
         $request->validate([
@@ -35,9 +36,21 @@ class OrderController extends Controller
             'adresse' => 'required|string',
             'ville' => 'required|string',
         ]);
+=======
+{
+    $request->validate([
+        'nom' => 'required',
+        'prenom' => 'required',
+        'email' => 'required|email',
+        'telephone' => 'required',
+        'adresse' => 'required',
+        'ville' => 'required',
+    ]);
+>>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
 
-        $cart = session()->get('cart', []);
+    $cart = session()->get('cart', []);
 
+<<<<<<< HEAD
         if (empty($cart)) {
             return redirect()->back()->with('error', 'Votre panier est vide.');
         }
@@ -95,4 +108,44 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Une erreur est survenue : ' . $e->getMessage());
         }
     }
+=======
+    if(empty($cart)){
+        return back()->with('error','Panier vide');
+    }
+
+    $client = Client::create([
+        'nom'=>$request->nom,
+        'prenom'=>$request->prenom,
+        'email'=>$request->email,
+        'telephone'=>$request->telephone,
+        'adresse'=>$request->adresse,
+        'ville'=>$request->ville
+    ]);
+
+    $total = 0;
+    foreach($cart as $item){
+        $total += $item['price'] * $item['quantity'];
+    }
+
+    $order = Order::create([
+        'client_id'=>$client->id,
+        'total_price'=>$total,
+        'status'=>'pending'
+    ]);
+
+    foreach($cart as $item){
+        OrderItem::create([
+            'order_id'=>$order->id,
+            'product_id'=>$item['id'],
+            'quantity'=>$item['quantity'],
+            'price'=>$item['price']
+        ]);
+    }
+
+    session()->forget('cart');
+
+    return redirect('merci');
+}
+
+>>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
 }

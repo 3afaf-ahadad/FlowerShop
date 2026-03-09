@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
@@ -12,11 +11,12 @@ use App\Http\Controllers\ProfileController;
 | 🌸 Public Routes
 |--------------------------------------------------------------------------
 */
+// Had l-route hya l-accueil (home)
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| 🛒 Cart Routes
+| 🛒 Cart Routes (Panier)
 |--------------------------------------------------------------------------
 */
 Route::prefix('cart')->group(function () {
@@ -24,6 +24,7 @@ Route::prefix('cart')->group(function () {
     Route::post('/add/{id}', [CartController::class, 'add'])->name('cart.add');
     Route::patch('/update', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
 });
 
 /*
@@ -34,15 +35,13 @@ Route::prefix('cart')->group(function () {
 Route::middleware(['auth'])->group(function () {
     
     // Logic dyal redirect mlli kiy-dir user login
-    Route::middleware(['auth'])->group(function () {
-    // Had l-route hya li khassa t-khdem mlli kadi-ri login
     Route::get('/dashboard', function () {
         if (auth()->user()->is_admin) {
             return redirect()->route('admin.dashboard');
         }
         return redirect()->route('home');
-    })->name('dashboard'); 
-});
+    })->name('dashboard');
+
     // Checkout o Orders
     Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
@@ -66,24 +65,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard'); 
     })->name('admin.dashboard');
+    
+    // Route bach t-zidi flower jdida
+    Route::post('/products/store', [ProductController::class, 'store'])->name('admin.products.store');
 });
 
-// Auth (Login, Register, etc.)
+// Auth Routes (Login, Register, etc.)
 require __DIR__.'/auth.php';
-=======
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\ProductController;
-
-// 1. Boutique
-Route::get('/', [ProductController::class, 'index'])->name('products.index');
-
-// 2. Panier (Standardized Routes)
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add'); // POST hna!
-Route::patch('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-
-// 3. Checkout
-Route::get('/checkout', fn() => view('checkout'))->name('checkout');
->>>>>>> nouhaila
