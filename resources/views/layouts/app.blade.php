@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>FlowerAtelier 🌸</title>
     
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=playfair-display:400,700|figtree:400,500,600&display=swap" rel="stylesheet" />
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#fdfbfb] antialiased">
+
     @if(session('success'))
-    <div id="flash-message" class="fixed top-24 right-10 z-50 transform transition-all duration-500 ease-in-out">
-        <div class="bg-white/90 backdrop-blur-md border-l-4 border-pink-400 shadow-2xl rounded-2xl px-8 py-4 flex items-center space-x-4">
+    <div id="flash-message" class="fixed top-24 right-10 z-[60] transform transition-all duration-500 ease-in-out">
+        <div class="bg-white/90 backdrop-blur-md border-l-4 border-pink-400 shadow-2xl rounded-2xl px-8 py-4 flex items-center space-x-4 border border-pink-50">
             <div class="bg-pink-100 p-2 rounded-full">
                 <span class="text-xl">✨</span>
             </div>
@@ -34,21 +39,21 @@
             }
         }, 4000);
     </script>
-@endif
+    @endif
+
     <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="{{ url('/') }}" class="text-2xl font-serif font-bold text-gray-800 tracking-tighter">
                 Flower<span class="text-pink-400 italic">Atelier</span>
             </a>
 
-            <div class="flex items-center gap-6">
-                <a href="{{ url('/') }}" class="hidden md:block text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 hover:text-pink-500 transition">Boutique</a>
+            <div class="flex items-center space-x-8">
+                <a href="{{ url('/') }}" class="text-[11px] uppercase tracking-[0.2em] font-bold text-gray-600 hover:text-pink-400 transition">Boutique</a>
                 
-                {{-- Bouton Panier --}}
-                <a href="{{ route('cart.index') }}" class="relative p-2 bg-pink-50 rounded-full text-pink-500 hover:bg-pink-500 hover:text-white transition-all">
-                    <span class="text-xl">🛒</span>
+                <a href="{{ route('cart.index') }}" class="relative group p-2">
+                    <span class="text-2xl group-hover:scale-110 transition-transform duration-300 block">🛒</span>
                     @if(session('cart') && count(session('cart')) > 0)
-                        <span class="absolute -top-1 -right-1 bg-gray-900 text-white text-[8px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">
+                        <span class="absolute -top-1 -right-1 bg-pink-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] h-[18px] flex items-center justify-center shadow-lg border-2 border-white">
                             {{ count(session('cart')) }}
                         </span>
                     @endif
@@ -60,5 +65,12 @@
     <main>
         @yield('content')
     </main>
+
+    <footer class="bg-white border-t border-gray-100 py-12 mt-20">
+        <div class="text-center">
+            <p class="font-serif italic text-gray-400">© 2026 FlowerAtelier. Fait avec amour 🌸</p>
+        </div>
+    </footer>
+
 </body>
 </html>
