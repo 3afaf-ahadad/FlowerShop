@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
@@ -78,4 +78,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // 4. Gestion des Catégories (Member 2)
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+});
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    
 });
