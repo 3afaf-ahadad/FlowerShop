@@ -6,7 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    // permission Laravel 
-    // enregistrer l info dans la base de données
-    protected $fillable = ['full_name', 'address', 'city', 'phone', 'total_amount'];
+    use HasFactory;
+
+    protected $fillable = [
+        'reference', 'customer_name', 'customer_email', 
+        'address', 'total_price', 'status'
+    ];
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

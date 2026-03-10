@@ -56,3 +56,26 @@ $total = session('order_total');
 return view('confirmation', compact('reference','cart','total'));
 
 })->name('confirmation');
+/*
+|--------------------------------------------------------------------------
+| 🔐 Admin Routes (Espace Privé)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+
+    // 1. Dashboard Principal (Vue d'ensemble)
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+
+    // 2. Gestion des Commandes (Member 3)
+    Route::get('/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
+    Route::patch('/orders/{id}/status', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
+    // 3. Gestion des Produits (Member 2)
+    // Had 'resource' kat-qad lik (Index, Create, Store, Edit, Update, Delete) f ster wahed
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+
+    // 4. Gestion des Catégories (Member 2)
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+});
