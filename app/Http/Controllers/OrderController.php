@@ -1,10 +1,11 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\OrderConfirmed; // Had l-class li 3ndek f image_582f39
+use App\Mail\OrderConfirmed;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -14,20 +15,23 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
+    
+    
     public function index()
     {
+    
         $cart = session()->get('cart', []);
         
         if (empty($cart)) {
             return redirect()->route('cart.index')->with('error', 'Votre panier est vide.');
         }
 
-        return view('checkout', compact('cart')); // Khass t-koun 3ndek view smitha checkout.blade.php
+        return view('checkout', compact('cart'));
     }
+
     public function store(Request $request)
-<<<<<<< HEAD
     {
-        // 1. Validation
+        
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
@@ -36,21 +40,8 @@ class OrderController extends Controller
             'adresse' => 'required|string',
             'ville' => 'required|string',
         ]);
-=======
-{
-    $request->validate([
-        'nom' => 'required',
-        'prenom' => 'required',
-        'email' => 'required|email',
-        'telephone' => 'required',
-        'adresse' => 'required',
-        'ville' => 'required',
-    ]);
->>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
 
-    $cart = session()->get('cart', []);
-
-<<<<<<< HEAD
+        $cart = session()->get('cart', []);
         if (empty($cart)) {
             return redirect()->back()->with('error', 'Votre panier est vide.');
         }
@@ -58,7 +49,7 @@ class OrderController extends Controller
         try {
             DB::beginTransaction();
 
-            // 2. Create Client
+            
             $client = Client::create([
                 'nom' => $request->nom,
                 'prenom' => $request->prenom,
@@ -68,20 +59,17 @@ class OrderController extends Controller
                 'ville' => $request->ville,
             ]);
 
-            // 3. Calculate Total
             $total = 0;
             foreach ($cart as $item) {
                 $total += $item['price'] * $item['quantity'];
             }
 
-            // 4. Create Order
             $order = Order::create([
                 'client_id' => $client->id,
                 'total_price' => $total,
                 'status' => 'pending',
             ]);
 
-            // 5. Create Order Items
             foreach ($cart as $item) {
                 OrderItem::create([
                     'order_id' => $order->id,
@@ -93,14 +81,10 @@ class OrderController extends Controller
 
             DB::commit();
 
-            // ✨ 6. ENVOI DE L'EMAIL
-            // Kansiftou l-mail l-email dyal l-client li dkhl f l-form
             Mail::to($client->email)->send(new OrderConfirmed($order));
 
-            // 7. Clear Cart
             Session::forget('cart');
 
-            // 8. Redirect l-page "Merci"
             return redirect()->route('order.success');
 
         } catch (\Exception $e) {
@@ -108,44 +92,27 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Une erreur est survenue : ' . $e->getMessage());
         }
     }
-=======
-    if(empty($cart)){
-        return back()->with('error','Panier vide');
+
+
+    public function adminIndex()
+    {
+        $orders = Order::with('client')->get(); 
+
+        return view('admin.orders.index', compact('orders'));
     }
 
-    $client = Client::create([
-        'nom'=>$request->nom,
-        'prenom'=>$request->prenom,
-        'email'=>$request->email,
-        'telephone'=>$request->telephone,
-        'adresse'=>$request->adresse,
-        'ville'=>$request->ville
-    ]);
 
-    $total = 0;
-    foreach($cart as $item){
-        $total += $item['price'] * $item['quantity'];
+    public function ship($id)
+    {
+        $order = Order::findOrFail($id);
+
+        $order->update(['status' => 'shipped']);
+
+        return redirect()->back()->with('success', 'Order marked as shipped!');
     }
-
-    $order = Order::create([
-        'client_id'=>$client->id,
-        'total_price'=>$total,
-        'status'=>'pending'
-    ]);
-
-    foreach($cart as $item){
-        OrderItem::create([
-            'order_id'=>$order->id,
-            'product_id'=>$item['id'],
-            'quantity'=>$item['quantity'],
-            'price'=>$item['price']
-        ]);
-    }
-
-    session()->forget('cart');
-
-    return redirect('merci');
 }
 
->>>>>>> 436bc6ae158341906975e47ca401e52e9e2562eb
-}
+
+
+
+

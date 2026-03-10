@@ -4,6 +4,7 @@
 <div class="container mx-auto">
     <h1 class="text-2xl font-bold mb-6 text-gray-800">Tableau de Bord - Vue d'ensemble</h1>
 
+<<<<<<< HEAD
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <p class="text-sm text-gray-500 uppercase font-semibold">Total Produits</p>
@@ -58,3 +59,36 @@
     </div>
 </div>
 @endsection
+=======
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <p class="text-gray-500 text-sm uppercase">Produits en Stock</p>
+        <p class="text-3xl font-bold text-gray-800">{{ $totalProducts }}</p>
+        {{-- ✅ Comment: $totalProducts was added in DashboardController as Product::count() --}}
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <p class="text-gray-500 text-sm uppercase">Commandes Totales</p>
+        <p class="text-3xl font-bold text-gray-800">{{ $totalOrders }}</p>
+        {{-- ✅ Comment: $totalOrders added via Order::count() in DashboardController --}}
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-red-600">
+        <p class="text-gray-500 text-sm uppercase">Alertes Stock Faible</p>
+        <p class="text-3xl font-bold">{{ $lowStockCount }}</p>
+        {{-- ✅ Comment: $lowStockCount added via Product::where('stock','<',5)->count() --}}
+    </div>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+    <h2 class="text-xl mb-4 font-semibold">Produits à réapprovisionner</h2>
+    <ul>
+        @foreach($lowStockProducts as $product)
+            <li>{{ $product->name }} ({{ $product->stock }} restant)</li>
+        @endforeach
+        {{-- ✅ Comment: $lowStockProducts added in DashboardController as Product::where('stock','<',5)->get() --}}
+    </ul>
+</div>
+@endsection
+
+>>>>>>> 71ae36b44f0bb1abab62d073365f2a909512db1d
